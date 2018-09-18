@@ -1,6 +1,6 @@
 #connection: local
 ansible_user: admin
-ansible_ssh_pass: eitcadmin#2014
+ansible_ssh_pass: |!vault
 #ansible_connection: local
 #ansible_network_os: ios
 
