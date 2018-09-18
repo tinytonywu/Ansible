@@ -1,0 +1,22 @@
+---
+ - name: Backup cisco sw running-config
+   hosts: SKY_Cisco_Router
+   gather_facts: false
+#   connection: network_cli
+#  connection vars  in file with path /etc/ansible/host_vars/C2960Xwifi
+
+   tasks:
+    - name: Show running-cfg and register it as a variable
+      ios_command:
+       commands:
+         - show run
+      register: running_config
+
+    - name: Set datetime as a variable called timestamp
+      set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%Y%m%d%H%M') }}"
+
+    - name: Copy SW running-cfg to local file with name and time
+      copy:
+       content: "{{ running_config.stdout[0] }}"
+       dest: /etc/ansible/backup/Router/{{inventory_hostname}}_running-cfg{{timestamp}}.txt

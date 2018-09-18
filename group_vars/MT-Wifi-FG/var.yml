@@ -1,0 +1,12 @@
+---
+#try to backup fortios device
+#username: admin
+#password: "{{ vault_pass }}"
+#ansible_connection: network_cli
+#ansible_network_os: ios
+ansible_user: tony.wu
+ansible_ssh_pass: "{{ vault_pass }}"
+#ansible_become: yes
+#ansible_become_method: enable
+#ansible_become_pass: "{{ vault_enable }}"
+

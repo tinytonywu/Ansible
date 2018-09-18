@@ -1,0 +1,20 @@
+---
+ - name: Backup Cisco SW1 running-config
+   hosts: 1Cisco_SW
+   gather_facts: false
+
+   tasks:
+    - name: Show running-cfg and register it as a variable
+      ios_command:
+       commands:
+         - show run
+      register: running_config
+
+    - name: Set1 datetime as a variable called timestamp
+      set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%Y%m%d%H%M') }}"
+
+    - name: Copy SW running-cfg to local file with name and time
+      copy:
+       content: "{{ running_config.stdout[0] }}"
+       dest: /etc/ansible/backup/Switch/{{inventory_hostname}}_running-cfg{{timestamp}}.txt

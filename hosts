@@ -1,0 +1,227 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+
+[SKY_Local]
+#C2960Xwifi ansible_host=192.168.1.250
+MT_3850 ansible_host=10.32.1.250
+SKY_C4506E-A ansible_host=192.168.76.251
+SKY_C4506E-S ansible_host=192.168.76.252
+
+[SKY_CTI]
+SKY_CTI_201.250 ansible_host=192.168.201.250
+SKY_CTI_Audio_POC ansible_host=192.168.201.249
+#SKY_CTI_25.250 no ssh
+
+[SKY_VOIP_SW]
+SKY_PBX_200_SW ansible_host=192.168.200.250
+
+[SKY_APP]
+SKY_APP_LAB ansible_host=10.33.47.250
+
+[SKY_DMZ]
+#SKY_DMZ_C3550 no ssh
+
+[SKY_FUGO]
+SKY_FUGO_C2960X-41.253 ansible_host=192.168.41.253
+SKY_FUGO_C3750G-41.252 ansible_host=192.168.41.252
+#SKY_FUGO_C3550L3-A no ssh
+#SKY_FUGO_C3550L3-S no ssh
+
+[SKY_EHS_Remote]
+#EHS_Remote_C2950_SW no ssh
+
+[SKY_ET1]
+SKY_LTM_SW_42.248 ansible_host=192.168.42.248
+
+[SKY_Internet]
+SKY_Internet_SW ansible_host=192.168.35.33
+
+[SKY_MGMT]
+#SKY_35.248 no ssh
+#SKY_C3750G-35.240  no ssh
+SKY_MGMT_TelRoom_35.34 ansible_host=192.168.35.34
+SKY_InfoRoom_C2960X-35.31 ansible_host=192.168.35.31
+
+[SKY_OA_ServerFarm]
+SKY_ETMall_57.250 ansible_host=192.168.57.250
+#SKY_C4506_OA no ssh 192.168.34.254
+#192.168.34.249 no ssh
+#192.168.34.248 no ssh
+#192.168.34.246 no ssh
+SKY_OA_VM_Stack_C3750 ansible_host=192.168.34.220
+#192.168.1.251_C3750G no ssh
+SKY_Ulife_TestServer ansible_host=10.33.40.250
+#10.33.4.253 C3750G no ssh
+SKY_OA_C2960X_4.248 ansible_host=10.33.4.248
+SKY_OA_PMCM_C2960X_4.246 ansible_host=10.33.4.246
+
+[SKY_SDET]
+SKY_SDET_C2960X-9.251 ansible_host=172.21.9.251
+#QCT LB9 172.21.9.250 not test ansible module yet
+#QCT LY8-A 172.21.9.249 not test ansible module yet
+#QCT LY8-S 172.21.9.248 not test ansible module yet
+
+[SKY_Ulife_Fugo]
+SKY_Ulife_Fugo-2960s ansible_host=10.35.6.250
+
+[SKY_VDI]
+SKY_RDS-C2960X-52.250 ansible_host=10.33.52.250
+
+[SKY_Cisco_SW1:children]
+SKY_Local
+SKY_CTI
+SKY_VOIP_SW
+SKY_APP
+[SKY_Cisco_SW2:children]
+SKY_DMZ
+SKY_FUGO
+SKY_EHS_Remote
+[SKY_Cisco_SW3:children]
+SKY_ET1
+SKY_Internet
+SKY_MGMT
+[SKY_Cisco_SW4:children]
+SKY_OA_ServerFarm
+SKY_SDET
+[SKY_Cisco_SW5:children]
+SKY_Ulife_Fugo
+SKY_VDI
+
+[SKY_VOIP_Router]
+SKY_PBX_3925R ansible_host=192.168.201.253
+
+[SKY_Remote_Router]
+SKY_3825R-A ansible_host=192.168.171.33
+SKY_2811R-S ansible_host=192.168.171.34
+SKY_EHS_Remote_3845R ansible_host=192.168.253.235
+ETMall_IDC_C2921R ansible_host=172.16.132.251
+
+[SKY_Internet_Router]
+SKY_Internet_C2811R ansible_host=192.168.253.9
+
+[SKY_Cisco_Router:children]
+SKY_Remote_Router
+SKY_Internet_Router
+
+#===============CB Cisco Switch & Cisco Router=====================
+[CB_SW]
+#CB_Core_3560E-A ansible_host=10.38.0.250 telnet
+CB_Core_3560E-S ansible_host=10.38.0.249
+CB_EIA_C2960s ansible_host=10.38.2.243
+CB_CTI_C2960s ansible_host=10.38.201.250
+
+[CB_Router]
+CB_2811R-A ansible_host=192.168.171.10
+CB_2811R-S ansible_host=192.168.171.11
+
+[CB_VOIP_SW]
+CB_VOIP_200_SW ansible_host=10.38.200.250
+#CB_VOIP_199_SW ansible_host=10.38.199.250 no route to host
+
+[CB_VOIP_Router]
+CB_VOIP_3925R-A ansible_host=10.38.201.253
+CB_VOIP_3925R-S ansible_host=10.38.201.200
+
+[CB_Cisco_SW:children]
+CB_SW
+CB_VOIP_SW
+
+[CB_Cisco_Router:children]
+CB_Router
+
+#===============TC Cisco Switch & Cisco Router=====================
+[TC_Cisco_SW]
+TC_User_Core-2960s-1.250-A ansible_host=10.36.1.250
+TC_User_Core-2960s-1.251-S ansible_host=10.36.1.251
+TC_CTI_Core-C2960s-201.249 ansible_host=10.36.201.249
+TC_CTI_C2960X-Stack-201.250 ansible_host=10.36.201.250
+
+[TC_VOIP_SW]
+TC_12F_VOIP-C2960X-198.249 ansible_host=10.36.198.249
+TC_12F_VOIP-C2960X-198.248 ansible_host=10.36.198.248
+TC_12F_VOIP-C2960X-198.247 ansible_host=10.36.198.247
+TC_12F_VOIP-C2960X-198.246 ansible_host=10.36.198.246
+TC_23F_CHT-PBX-C2960s ansible_host=10.36.200.250
+#No route to to subnet-->TC_23F_Sparq-PBX-C2960s ansible_host=10.36.199.250
+
+[TC_Cisco_Router]
+TC_2811R-A ansible_host=192.168.171.2
+TC_1841R-S ansible_host=192.168.171.3
+
+[TC_SW:children]
+TC_Cisco_SW
+TC_VOIP_SW
+
+[TC_VOIP_Router]
+TC_CHT_PBX-C3925R-A ansible_host=10.36.201.253
+TC_Sparq_PBX-C3925R-S ansible_host=10.36.201.200
+
+#===============TP Cisco Switch & Cisco Router=====================
+[TP_Cisco_SW]
+TP_12F_CTI-58.250-2960X ansible_host=192.168.58.250
+TP_12F_CoreStack.59.251-2960X ansible_host=192.168.59.251
+
+[TP_VOIP_SW]
+TP_6F_VOIP-C2960X-198.249 ansible_host=192.168.198.249
+TP_6F_VOIP-C2960X-198.248 ansible_host=192.168.198.248
+TP_6F_VOIP-C2960X-198.247 ansible_host=192.168.198.247
+TP_6F_VOIP-C2960X-198.246 ansible_host=192.168.198.246
+TP_12F_PBX-C2960X-198.250 ansible_host=192.168.198.250
+
+[TP_SW:children]
+TP_Cisco_SW
+TP_VOIP_SW
+
+[TP_Cisco_Router]
+TP_2911R-A ansible_host=192.168.171.50
+TP_2911R-S ansible_host=192.168.171.49
+
+[TP_VOIP_Router]
+TP_PBX_3925R ansible_host=192.168.58.251
+
+#================SKY Nexus Switch=========================
+[SKY_SAS_Nexus]
+SKY_Nexus_3064T ansible_host=192.168.35.246
+
+#=================All SW & Router=========================
+[Cisco_SW:children]
+CB_Cisco_SW
+SKY_Cisco_SW1
+SKY_Cisco_SW2
+SKY_Cisco_SW3
+SKY_Cisco_SW4
+SKY_Cisco_SW5
+
+[Cisco_Router:children]
+CB_Cisco_Router
+SKY_Cisco_Router
+TC_Cisco_Router
+TP_Cisco_Router
+
+#===================VOIP Router=================
+[VOIP_Router:children]
+CB_VOIP_Router
+SKY_VOIP_Router
+TC_VOIP_Router
+TP_VOIP_Router
+
+
+#===================Fortigate firewall test=================
+[FG310B]
+SKY_FG310B ansible_host=192.168.170.242
+
+[MT-Wifi-FG]
+MT-FG1000C ansible_host=192.168.170.234
+
+[MT-FG1KC]
+MT-1Kc ansible_host=192.168.170.234

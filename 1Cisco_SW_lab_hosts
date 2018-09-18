@@ -1,0 +1,7 @@
+[1Cisco_SW]
+#this is a test for vault string, group_var/1Cisco_SW, password was encrypted only,not all the file
+#MT_3850 ansible_host=10.32.1.250
+SKY_C4506E-A ansible_host=192.168.76.251
+#SKY_C4506E-S ansible_host=192.168.76.252
+
+

@@ -1,0 +1,121 @@
+---
+ - name: Backup Cisco SW1 running-config
+   hosts: SKY_Cisco_SW1
+   gather_facts: false
+
+   tasks:
+    - name: Show running-cfg and register it as a variable
+      ios_command:
+       commands:
+         - show run
+      register: running_config
+ 
+    - name: Set1 datetime as a variable called timestamp
+      set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%Y%m%d%H%M') }}"
+
+    - name: Copy SW running-cfg to local file with name and time
+      copy:
+       content: "{{ running_config.stdout[0] }}"
+       dest: /etc/ansible/backup/Switch/{{inventory_hostname}}_running-cfg{{timestamp}}.txt
+
+ - name: Backup Cisco SW2 running-config
+   hosts: SKY_Cisco_SW2
+   gather_facts: false
+
+   tasks:
+    - name: Show running-cfg and register it as a variable
+      ios_command:
+       commands:
+         - show run
+      register: running_config
+
+    - name: Set2 datetime as a variable called timestamp
+      set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%Y%m%d%H%M') }}"
+
+    - name: Copy SW running-cfg to local file with name and time
+      copy:
+       content: "{{ running_config.stdout[0] }}"
+       dest: /etc/ansible/backup/Switch/{{inventory_hostname}}_running-cfg{{timestamp}}.txt
+
+ - name: Backup Cisco SW3 running-config
+   hosts: SKY_Cisco_SW3
+   gather_facts: false
+
+   tasks:
+    - name: Show running-cfg and register it as a variable
+      ios_command:
+       commands:
+         - show run
+      register: running_config
+
+    - name: Set3 datetime as a variable called timestamp
+      set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%Y%m%d%H%M') }}"
+
+    - name: Copy SW running-cfg to local file with name and time
+      copy:
+       content: "{{ running_config.stdout[0] }}"
+       dest: /etc/ansible/backup/Switch/{{inventory_hostname}}_running-cfg{{timestamp}}.txt
+
+ - name: Backup Cisco SW4 running-config
+   hosts: SKY_Cisco_SW4
+   gather_facts: false
+
+   tasks:
+    - name: Show running-cfg and register it as a variable
+      ios_command:
+       commands:
+         - show run
+      register: running_config
+
+    - name: Set datetime as a variable called timestamp
+      set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%Y%m%d%H%M') }}"
+
+    - name: Copy SW running-cfg to local file with name and time
+      copy:
+       content: "{{ running_config.stdout[0] }}"
+       dest: /etc/ansible/backup/Switch/{{inventory_hostname}}_running-cfg{{timestamp}}.txt
+
+ - name: Backup Cisco SW5 running-config
+   hosts: SKY_Cisco_SW5
+   gather_facts: false
+
+   tasks:
+    - name: Show running-cfg and register it as a variable
+      ios_command:
+       commands:
+         - show run
+      register: running_config
+
+    - name: Set datetime as a variable called timestamp
+      set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%Y%m%d%H%M') }}"
+
+    - name: Copy SW running-cfg to local file with name and time
+      copy:
+       content: "{{ running_config.stdout[0] }}"
+       dest: /etc/ansible/backup/Switch/{{inventory_hostname}}_running-cfg{{timestamp}}.txt
+
+ - name: Backup Cisco Router running-config
+   hosts: Cisco_Router
+   gather_facts: false
+
+   tasks:
+    - name: Show running-cfg and register it as a variable
+      ios_command:
+       commands:
+         - show run
+      register: running_config
+
+    - name: Set datetime as a variable called timestamp
+      set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%Y%m%d%H%M') }}"
+
+    - name: Copy Router running-cfg to local file with name and time
+      copy:
+       content: "{{ running_config.stdout[0] }}"
+       dest: /etc/ansible/backup/Router/{{inventory_hostname}}_running-cfg{{timestamp}}.txt
+

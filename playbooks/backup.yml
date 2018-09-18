@@ -1,0 +1,18 @@
+---
+  - hosts: C2960X
+    gather_facts: true
+    connection: local
+    ansible_user: ubuntu16
+
+    tasks:
+     - name: First try YAML test
+       register: arp
+       ios_command:
+       commands:
+        - show ip arp
+
+     - name: save arp table to /etc/ansbile
+       copy:
+       conetent: "{{arp.stdout[0]}}"
+       dest: "/etc/ansible/arp_table_C2960X.txt
+     
